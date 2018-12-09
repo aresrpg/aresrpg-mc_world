@@ -1,20 +1,11 @@
 {
 	"name": "@aresrpg/aresrpg-world",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "World Module",
-	"main": "src/world.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
 	"author": "Sceat",
-	"license": "MIT",
-	"dependencies": {
-		"spiralloop": "^1.0.2"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
+	"main": "lib/world.js",
 	"homepage": "https://aresrpg.fr",
+	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/AresRPG/aresrpg-world"
@@ -24,5 +15,14 @@
 		"mmorpg",
 		"minecraft",
 		"world"
-	]
+	],
+	"scripts": {
+		"prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+	},
+	"dependencies": {
+		"spiralloop": "^1.0.2"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
