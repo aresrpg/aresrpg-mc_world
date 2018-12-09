@@ -4,7 +4,11 @@ Minecraft worlds dead-simple caching with spiral nearby chunks.
 
 > When nearby chunks are demanded the module will retrieve them from cache or from your provider in case they don't exists
 
-### Usage:
+### Install
+
+`npm i aresrpg-world`
+
+### Use:
 ```js
 import World from 'aresrpg-world'
 
