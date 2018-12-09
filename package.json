@@ -2,7 +2,7 @@
 	"name": "@aresrpg/aresrpg-world",
 	"version": "1.0.3",
 	"description": "World Module",
-	"main": "index.js",
+	"main": "src/world.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
