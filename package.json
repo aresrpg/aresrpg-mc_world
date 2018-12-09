@@ -1,6 +1,6 @@
 {
 	"name": "@aresrpg/aresrpg-world",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "World Module",
 	"main": "index.js",
 	"scripts": {
@@ -18,5 +18,11 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/AresRPG/aresrpg-world"
-	}
+	},
+	"keywords": [
+		"aresrpg",
+		"mmorpg",
+		"minecraft",
+		"world"
+	]
 }
