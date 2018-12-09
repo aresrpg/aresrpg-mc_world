@@ -4,6 +4,8 @@ Minecraft worlds dead-simple caching with spiral nearby chunks.
 
 > When nearby chunks are demanded the module will retrieve them from cache or from your provider in case they don't exists
 
+![](https://i.imgur.com/DAAZ2Hp.png)
+
 ### Install
 
 `npm i @aresrpg/aresrpg-world`
@@ -32,7 +34,6 @@ You may want to preload some chunks to enhance user experience. Find the coords 
 of your map and provide them
 
 ```js
-
 const centerX = 0
 const centerZ = 0
 

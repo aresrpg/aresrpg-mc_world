@@ -1,7 +1,7 @@
 {
 	"name": "@aresrpg/aresrpg-world",
-	"version": "1.0.7",
-	"description": "World Module",
+	"version": "1.0.8",
+	"description": "Aresrpg world loading module",
 	"author": "Sceat",
 	"main": "lib/world.js",
 	"homepage": "https://aresrpg.fr",
