@@ -1,6 +1,6 @@
 {
 	"name": "@aresrpg/aresrpg-world",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "World Module",
 	"main": "src/world.js",
 	"scripts": {
