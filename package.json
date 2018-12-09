@@ -1,6 +1,6 @@
 {
 	"name": "@aresrpg/aresrpg-world",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "World Module",
 	"author": "Sceat",
 	"main": "lib/world.js",
@@ -17,7 +17,7 @@
 		"world"
 	],
 	"scripts": {
-		"prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+		"prepare": "babel src --out-dir lib"
 	},
 	"dependencies": {
 		"spiralloop": "^1.0.2"
