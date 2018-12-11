@@ -101,4 +101,16 @@ export default class World {
 			z: (position & 0xf) + chunkZ * 16,
 		}
 	}
+
+	/**
+	 *
+	 * @param {Number} blockX
+	 * @param {Number} blockZ
+	 * @returns the { x, z } chunk position
+	 */
+	static chunkFromBlock(blockX, blockZ) {
+		const x = Math.floor(blockX / 16)
+		const z = Math.floor(blockZ / 16)
+		return { x, z }
+	}
 }
