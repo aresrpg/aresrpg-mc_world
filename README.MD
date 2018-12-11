@@ -24,6 +24,7 @@ async function readChunk(x, z) {
 	return await myAwesomeChunkFileReader.chunkAt(x, z)
 }
 ```
+
 We can now create the world instance with the chunk provider
 
 ```js
@@ -37,9 +38,9 @@ of your map and provide them
 const centerX = 0
 const centerZ = 0
 
-void async function(){
+void (async function() {
 	myWorld.preload(centerX, centerZ, 50)
-}()
+})()
 ```
 
 You can now update a player as many as needed
@@ -53,4 +54,19 @@ void (async function() {
 	const chunks = await Promise.all(nearbyChunks)
 	// chunks.forEach(c => player.sendChunkPacket(c))
 })()
+```
+
+The module also you to encode a block position to use with the multiBlockChange packet
+
+```js
+compressBlock(x, y, z, blockId) {
+	const { x: chunkX, z: chunkZ } = World.chunkFromBlock(x, z)
+	const relative = World.relativeBlockPosition(chunkX, chunkZ, x, z)
+	const horizontalPos = World.encodeRelativeBlockPosition(relative)
+	return { horizontalPos, y, blockId }
+}
+
+const blocks = []
+for(let i = 0; i < 10; i++)
+	blocks.push(compressBlock(0,0,0,0))
 ```
