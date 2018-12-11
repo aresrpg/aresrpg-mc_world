@@ -13,7 +13,7 @@ Minecraft worlds dead-simple caching with spiral nearby chunks.
 ### Use:
 
 ```js
-import World from 'aresrpg-world'
+import World from '@aresrpg/aresrpg-world'
 ```
 
 You will need to provide a way to read a chunk from a file, database, or anywhere else.
@@ -56,7 +56,7 @@ void (async function() {
 })()
 ```
 
-The module also you to encode a block position to use with the multiBlockChange packet
+The module also help you to encode a block position to use with the multiBlockChange packet
 
 ```js
 compressBlock(x, y, z, blockId) {
