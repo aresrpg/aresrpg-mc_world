@@ -66,4 +66,39 @@ export default class World {
 		})
 		return chunks
 	}
+
+	/**
+	 *
+	 * @param {Number} chunkX
+	 * @param {Number} chunkZ
+	 * @param {Number} x blockX
+	 * @param {Number} z blockZ
+	 * @returns the block position relative to the chunk (1 to 16)
+	 */
+	static relativeBlockPosition(chunkX, chunkZ, x, z) {
+		return { x: x - chunkX * 16, z: z - chunkZ * 16 }
+	}
+
+	/**
+	 *
+	 * @param {Object} relativePosition
+	 * @returns the block position relative to the chunk (1 to 16) encoded on 8 bits
+	 */
+	static encodeRelativeBlockPosition({ x, z }) {
+		return (x << 4) | z
+	}
+
+	/**
+	 *
+	 * @param {Number} position binary encoded horizontal block position
+	 * @param {Number} chunkX
+	 * @param {Number} chunkZ
+	 * @returns an Object { x, z } representing the provided position
+	 */
+	static readHorizontalBlockPosition(position, chunkX, chunkZ) {
+		return {
+			x: (position >> 4) + chunkX * 16,
+			z: (position & 0xf) + chunkZ * 16,
+		}
+	}
 }
