@@ -17,21 +17,25 @@ export default class World {
 	/**
 	 *
 	 * @param {Promise<Function>} readChunk function(x,z) to retrieve a chunk from a file or wherever
+	 * @param {Promise<Function>} readBitMap function(x,z) to retrieve the bitmap for a chunk column
 	 */
-	constructor(readChunk) {
+	constructor(readChunk, readBitMap) {
 		this.readChunk = readChunk
+		this.readBitMap = readBitMap
 	}
 
 	async cachedChunk(x, z, callback) {
 		await Promise.resolve() // ¯\_(ツ)_/¯
-		let chunk = this.chunks[x] && this.chunks[x][z]
+		let { chunk, bitMap } = (this.chunks[x] && this.chunks[x][z]) || {}
 		if (!chunk) {
-			chunk = await this.readChunk(x, z)
+			const [_chunk, _bitMap] = await Promise.all([this.readChunk(x, z), this.readBitMap(x, z)])
+			chunk = _chunk
+			bitMap = _bitMap
 			if (!this.chunks[x]) this.chunks[x] = []
-			this.chunks[x][z] = chunk
+			this.chunks[x][z] = { chunk, bitMap }
 			if (callback) callback()
 		}
-		return { x, z, chunk }
+		return { x, z, chunk, bitMap }
 	}
 
 	async preload(centerX, centerZ, distance) {
@@ -54,7 +58,7 @@ export default class World {
 	 * @param {Number} chunkZ
 	 * @param {Number} distance view distance
 	 * @param {Function} callback optional callback executed every time a chunk is retrieved from the provided loader
-	 * @returns {Promise[]} An array of promises which resolve as a Object { x, z, chunk }
+	 * @returns {Promise[]} An array of promises which resolve as an Object { x, z, chunk, bitMap }
 	 */
 	nearbyChunks(chunkX, chunkZ, distance, callback = undefined) {
 		const chunks = []
