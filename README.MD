@@ -16,19 +16,25 @@ Minecraft worlds dead-simple caching with spiral nearby chunks.
 import World from '@aresrpg/aresrpg-world'
 ```
 
-You will need to provide a way to read a chunk from a file, database, or anywhere else.
+You will need to provide a way to read a chunk and his bitmap from a file, database, or anywhere else.
 Here we'll use this snippet
+
+> the bitmap is a 16 bits mask (0xffff) or 0000 0000 0000 0000 with bits set to 1 for every 16×16×16 chunk section whose contain non air block. The least significant bit represents the chunk section at the bottom of the chunk column (from y=0 to y=15).
 
 ```js
 async function readChunk(x, z) {
 	return await myAwesomeChunkFileReader.chunkAt(x, z)
+}
+
+async function readBitmap(x, z) {
+	return await myAwesomeChunkFileReader.bitMap(x, z)
 }
 ```
 
 We can now create the world instance with the chunk provider
 
 ```js
-const myWorld = new World(readChunk)
+const myWorld = new World(readChunk, readBitmap)
 ```
 
 You may want to preload some chunks to enhance user experience. Find the coords of a chunk in the center
