@@ -17,7 +17,8 @@
 		"world"
 	],
 	"scripts": {
-		"prepare": "babel src --out-dir lib",
+		"prepack": "npm run build",
+		"build": "babel src -d lib",
 		"test": "babel-node ./test/index.js | tap-spec",
 		"ntest": "babel-node ./test/index.js | tnyan"
 	},
