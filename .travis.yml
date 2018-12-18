@@ -6,9 +6,8 @@ script:
   - npm run build
 deploy:
   provider: npm
-  email: 'contact@aresrpg.fr'
-  api_key:
-    secure: qt+gfqomCvXa2LDbZO63nwPxGuzMg4Gul1qSxXt/4Ry4Z0PHVv8Rbu/XoKIyMn0zJxbwnOrvGW2Q7QSEXTYaQhLnwcCfkK44xIlFd06oPtM0hMeOIWEL/mYX4hM5FNaAuK49F3Wn3BtU07EyHby762sNoHp8P94aKOoAyfsyBuzTE9ukRDIBhYBLZnpNfnb9PzVqT/Dk+ppjByfdbyLdU6mD4NOXnmqqcAvYZpmSlZpV3pKcr0D7+Q9YdrcnTkNTf3EHFPMfNBi3JMACvBTpGDqQYfcdPs4+7DS9DZjRHPoFs08FzlRd36ooGmaIlYwQi2Zo1hpjCv2G63ldDUkD5C22Oh4yst4UXwpIrEA5TabEavTeGJT4OwzolyXQucmkKI+hIsJ2uzzdNJBvhHQO+0JHf40JIqXueQQKht1FHqkE0XnXWkq1JXOJwh5p9pNLfBmyfXnx+zTUp9eJw1JxFJKLieYJl/2rBwtcfugdm6iApkJvfwx0pp3kMYNI3/5+AVjrJWb/iyB4QfaDiD3wHUJ9EVu31rwZGIbusRhKiZXAjuZZOfZCNNlL0UahtYaRAAtq6Bl51GD3q17IB1dEEjN8XIegWHRDf2vD6F0+o4cEFc+iS4If9HyrYSgMM20tY96VApuKyluA2yF0okUifwd4tsHvBT4YxoU2qHW5/Nc=
+  email: '$NPM_EMAIL'
+  api_key: '$NPM_TOKEN'
   skip_cleanup: true
   script: echo "Deploying to npm ..."
   on:
