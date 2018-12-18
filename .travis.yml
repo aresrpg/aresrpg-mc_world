@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - node
+script:
+  - npm run test
 deploy:
   provider: npm
   email: contact@aresrpg.fr
@@ -10,6 +12,3 @@ deploy:
   on:
     tags: true
     branch: master
-install:
-  - npm install -g babel-cli
-  - npm install
