@@ -61,7 +61,7 @@ const centerX = 0
 const centerZ = 0
 
 void (async function() {
-	myWorld.preload(centerX, centerZ, 50)
+	await myWorld.preload(centerX, centerZ, 50)
 })()
 ```
 
