@@ -19,8 +19,8 @@
 	"scripts": {
 		"prepack": "npm run build",
 		"build": "babel src -d lib",
-		"test": "babel-node ./test/index.js | tap-spec",
-		"ntest": "babel-node ./test/index.js | tnyan"
+		"test": "babel-node test | tap-spec",
+		"postversion": "git push && git push --tags"
 	},
 	"dependencies": {
 		"cli-progress": "^2.1.1",
@@ -32,15 +32,23 @@
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.4.4",
-		"@babel/core": "^7.4.4",
-		"@babel/node": "^7.2.2",
+		"@babel/core": "^7.4.5",
+		"@babel/node": "^7.4.5",
 		"@babel/plugin-proposal-class-properties": "^7.4.4",
 		"@babel/plugin-proposal-decorators": "^7.4.4",
+		"@babel/plugin-proposal-export-default-from": "^7.2.0",
 		"@babel/plugin-proposal-function-bind": "^7.2.0",
+		"@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
+		"@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
+		"@babel/plugin-proposal-numeric-separator": "^7.2.0",
+		"@babel/plugin-proposal-optional-catch-binding": "^7.2.0",
 		"@babel/plugin-proposal-optional-chaining": "^7.2.0",
-		"@babel/preset-env": "^7.4.4",
-		"blue-tape": "^1.0.0",
-		"tap-nyan": "^1.1.0",
+		"@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+		"@babel/plugin-proposal-private-methods": "^7.4.4",
+		"@babel/plugin-proposal-throw-expressions": "^7.2.0",
+		"@babel/plugin-syntax-dynamic-import": "^7.2.0",
+		"@babel/preset-env": "^7.4.5",
+		"@hydre/doubt": "^1.1.0",
 		"tap-spec": "^5.0.0"
 	}
 }

@@ -1,10 +1,10 @@
-import tape from 'blue-tape'
+import '@hydre/doubt'
 import World from '../src/world'
 
-tape('Chunks should be cached', async t => {
+'Cached chunks'.doubt(async () => {
 	const world = new World(() => 'chunk', () => 'bitmap')
 	await world.cachedChunk(0, 0)
-	t.equal(world.chunks.length, 1, `cache length should be 1 but is ${world.chunks.length}`)
+	'should have a length of 1'.because(world.chunks.length).isEqualTo(1)
 	const { chunk } = world.chunks[0][0]
-	t.equal(chunk, 'chunk', `${chunk} should be chunk`)
+	'should contain valid chunks'.because(chunk).isEqualTo('chunk')
 })
