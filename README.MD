@@ -2,7 +2,7 @@
 
 # aresrpg-world
 
-[![][discord]][discordlink] [![][twitter]][twitterlink]
+[![][discord]][discordlink] [![][twitter]][twitterlink] ![][mcversion]
 
 [licence]: https://img.shields.io/github/license/AresRPG/aresrpg-world.svg?style=for-the-badge
 [npm]: https://img.shields.io/npm/v/@aresrpg/aresrpg-world.svg?logo=npm&style=for-the-badge
@@ -14,6 +14,7 @@
 [twitterlink]: https://twitter.com/AresRPG
 [discord]: https://img.shields.io/discord/265104803531587584.svg?logo=discord&style=for-the-badge
 [discordlink]: https://discord.gg/Ea6a5cn
+[mcversion]: https://img.shields.io/badge/minecraft-1.12+-AB47BC.svg?style=for-the-badge
 
 Minecraft worlds dead-simple caching with spiral nearby chunks.
 
