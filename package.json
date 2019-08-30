@@ -23,7 +23,7 @@
 		"postversion": "git push && git push --tags"
 	},
 	"dependencies": {
-		"cli-progress": "^2.1.1",
+		"cli-progress": "^3.0.0",
 		"colors": "^1.3.3",
 		"spiralloop": "^1.0.2"
 	},
@@ -31,24 +31,24 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.4.4",
-		"@babel/core": "^7.4.5",
-		"@babel/node": "^7.4.5",
-		"@babel/plugin-proposal-class-properties": "^7.4.4",
+		"@babel/cli": "^7.5.5",
+		"@babel/core": "^7.5.5",
+		"@babel/node": "^7.5.5",
+		"@babel/plugin-proposal-class-properties": "^7.5.5",
 		"@babel/plugin-proposal-decorators": "^7.4.4",
-		"@babel/plugin-proposal-export-default-from": "^7.2.0",
+		"@babel/plugin-proposal-export-default-from": "^7.5.2",
 		"@babel/plugin-proposal-function-bind": "^7.2.0",
 		"@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
 		"@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
 		"@babel/plugin-proposal-numeric-separator": "^7.2.0",
 		"@babel/plugin-proposal-optional-catch-binding": "^7.2.0",
 		"@babel/plugin-proposal-optional-chaining": "^7.2.0",
-		"@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+		"@babel/plugin-proposal-pipeline-operator": "^7.5.0",
 		"@babel/plugin-proposal-private-methods": "^7.4.4",
 		"@babel/plugin-proposal-throw-expressions": "^7.2.0",
 		"@babel/plugin-syntax-dynamic-import": "^7.2.0",
-		"@babel/preset-env": "^7.4.5",
-		"@hydre/doubt": "^1.1.0",
+		"@babel/preset-env": "^7.5.5",
+		"@hydre/doubt": "^1.3.1",
 		"tap-spec": "^5.0.0"
 	}
 }
