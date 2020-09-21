@@ -1,65 +1,53 @@
 import Spiral from 'spiralloop'
-import Progress from 'cli-progress'
-import 'colors'
 
-const make_progress_bar = () => new Progress.Bar(
-    {
-      fps    : 5,
-      stream : process.stdout,
-      barsize: 65,
-      format :
-    '[aresrpg] Preloading chunks'.magenta
-    + ' {bar} | [{value}/{total}] - '
-    + '{duration}s'.magenta,
-    },
-    progress.Presets.shades_classic,
-)
-const World = {
-  /**
-   * @returns the block position relative to the chunk (1 to 16)
-   */
-  relative_block_position: ({ chunk_x, chunk_z, x, z }) => ({
-    x: x - chunk_x * 16,
-    z: z - chunk_z * 16,
-  }),
-  /**
-   * @returns the block position relative
-   * to the chunk (1 to 16) encoded on 8 bits
-   */
-  encode_relative_block_position: ({ x, z }) => x << 4 | z,
-  /**
-   * @returns an Object { x, z } representing the provided position
-   */
-  read_horizontal_block_position: ({ position, chunkX, chunkZ }) => ({
-    x: (position >> 4) + chunkX * 16,
-    z: (position & 0xF) + chunkZ * 16,
-  }),
-  /**
-   *
-   * @param {Number} blockX
-   * @param {Number} blockZ
-   * @returns the { x, z } chunk position
-   */
-  chunk_from_block: ({ blockX, blockZ }) => ({
-    x: Math.floor(blockX / 16),
-    z: Math.floor(blockZ / 16),
-  }),
-}
+/**
+ * @returns the block position relative to the chunk (1 to 16)
+ */
+export const relative_block_position = ({ chunk_x, chunk_z, x, z }) => ({
+  x: x - chunk_x * 16,
+  z: z - chunk_z * 16,
+})
+
+/**
+ * @returns the block position relative
+ * to the chunk (1 to 16) encoded on 8 bits
+ */
+export const encode_relative_block_position = ({ x, z }) => x << 4 | z
+
+/**
+ * @returns an Object { x, z } representing the provided position
+ */
+export const read_horizontal_block_position = ({
+  position,
+  chunk_x,
+  chunk_z,
+}) => ({
+  x: (position >> 4) + chunk_x * 16,
+  z: (position & 0xF) + chunk_z * 16,
+})
+
+/**
+ *
+ * @returns the { x, z } chunk position
+ */
+export const chunk_from_block = ({ x, z }) => ({
+  x: Math.floor(z / 16),
+  z: Math.floor(z / 16),
+})
 
 export default ({ read_chunk, read_bitmap }) => {
   const chunks = []
-  const progress = make_progress_bar()
-  const cached_chunk = async ({ x, z }) => {
-    const { chunk, bitmap, cache_hit }
-      = chunks[x]?.[z]
-      ?? await read_chunk({
-        x,
-        z,
-      })
+  const cached_chunk = async block => {
+    const { x, z } = block
+    const { chunk, bitmap, cache_hit } = chunks[x]?.[z] ?? {
+      ...await read_chunk(block),
+      ...await read_bitmap(block),
+    }
 
+    // atomic updates could be improved here
     if (!cache_hit) {
       // eslint-disable-next-line require-atomic-updates
-      if (!chunks[x]) chunks[x] = []
+      chunks[x] ||= []
       // eslint-disable-next-line require-atomic-updates
       chunks[x][z] = {
         chunk,
@@ -75,46 +63,34 @@ export default ({ read_chunk, read_bitmap }) => {
       bitmap,
     }
   }
+  const nearby_chunks = ({ chunk_x, chunk_z, distance }) => {
+    const result = []
+    const range = distance * 2
+    const pos_x = chunk_x - distance
+    const pos_z = chunk_z - distance
+
+    Spiral([range, range], (x, z) => {
+      const block = {
+        x: x + pos_x,
+        z: z + pos_z,
+      }
+
+      result.push(cached_chunk(block))
+    })
+
+    return result
+  }
 
   return {
-    ...World,
-    cached_chunk,
+    preload: async ({ chunk_x, chunk_z, distance }) => {
+      console.log('[aresrpg] Loading world..')
+      await Promise.all(nearby_chunks({
+        chunk_x,
+        chunk_z,
+        distance,
+      }))
+      console.log('[aresrpg] World loaded!')
+    },
+    nearby_chunks,
   }
 }
-
-// export default class S {
-
-//   async preload(centerX, centerZ, distance) {
-//     let toLoad = 0
-//     const range = distance * 2
-//     spiral([range, range], () => {
-//       toLoad++
-//     })
-//     console.log('[aresrpg] Loading world..'.magenta)
-//     this.progress.start(toLoad, 0)
-//     const chunks = this.nearbyChunks(centerX, centerZ, distance, () => this.progress.increment())
-//     await Promise.all(chunks)
-//     this.progress.stop()
-//     console.log('[aresrpg] World loaded!'.magenta)
-//   }
-
-//   /**
-//    *
-//    * @param {Number} chunkX
-//    * @param {Number} chunkZ
-//    * @param {Number} distance view distance
-//    * @param {Function} callback optional callback executed every time a chunk is retrieved from the provided loader
-//    * @returns {Promise[]} An array of promises which resolve as an Object { x, z, chunk, bitMap }
-//    */
-//   nearbyChunks(chunkX, chunkZ, distance, callback = undefined) {
-//     const chunks = []
-//     const range = distance * 2
-//     const posX = chunkX - distance
-//     const posZ = chunkZ - distance
-//     spiral([range, range], (x, z) => {
-//       chunks.push(this.cachedChunk(x + posX, z + posZ, callback))
-//     })
-//     return chunks
-//   }
-
-// }
