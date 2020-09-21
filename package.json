@@ -1,6 +1,6 @@
 {
   "name": "@aresrpg/aresrpg-world",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Aresrpg world loading module",
   "main": "src/index.js",
   "type": "module",
